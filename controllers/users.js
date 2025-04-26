@@ -1,45 +1,70 @@
-const { response, request } = require('express')
+const { response, request } = require("express")
+const db = require('../database/firebase')
 
 
-const usersGet = (req = request, res = response) => {
-  const {q, nombre='no name', apikey, page, limit} = req.query
-  res.json({
-    msg: "get API",
-  })
+const usersGet = async (req = request, res = response) => {
+  try {
+    const snapshot = await db.collection("users").get()
+    const users = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
+    res.json(users)
+  } catch (err) {
+    console.error(err)
+    res.status(500).send("Error al obtener usuarios")
+  }
 }
 
-const usersPost = (req, res = response) => {  
-  const body = req.body
-  res.json({
-    msg: "post API",
-    body
-  })
+const Usuario = require("../models/usuario")
+
+const usersPost = async (req, res = response) => {
+  try {
+    const newUser = new Usuario(req.body)
+
+    const docRef = await db.collection("users").add({ ...newUser })
+
+    res.status(201).json({
+      msg: "Usuario agregado correctamente",
+      id: docRef.id,
+      ...newUser,
+    });
+  } catch (err) {
+    console.error(err)
+    res.status(500).send("Error al agregar usuario")
+  }
+};
+
+
+
+const userPut = async (req, res = response) => {
+  const { id } = req.params
+  const data = req.body
+  try {
+    await db.collection("users").doc(id).update(data)
+    res.json({ id, ...data })
+  } catch (err) {
+    console.error(err)
+    res.status(500).send("Error al actualizar usuario")
+  }
 }
-
-const userPut = (req, res = response) => {
-
-  const {id} = req.params.id
-  res.json({
-    msg: "put API",
-  })
-}
-
 
 const usersPatch = (req, res = response) => {
-  res.json({
-    msg: "patch API",
-  })
-}
-const usersDelete = (req, res = response) => {
-  res.json({
-    msg: "delete API",
-  })
+  res.json({ msg: "patch API" });
 }
 
-module.exports = {   
+const usersDelete = async (req, res = response) => {
+  const { id } = req.params;
+  try {
+    await db.collection("users").doc(id).delete()
+    res.json({ msg: "Usuario eliminado", id })
+  } catch (err) {
+    console.error(err)
+    res.status(500).send("Error al eliminar usuario")
+  }
+};
+
+module.exports = {
   usersGet,
   usersPost,
   userPut,
   usersPatch,
-  usersDelete
+  usersDelete,
 }
