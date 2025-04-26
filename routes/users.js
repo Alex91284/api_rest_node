@@ -1,4 +1,6 @@
 const { Router } = require("express")
+const upload = require("../middlewares/upload")
+
 const {
   usersGet,
   usersPost,
@@ -11,7 +13,7 @@ const router = Router()
 
 router.get("/", usersGet)
 
-router.post("/", usersPost)
+router.post("/", upload.single("file"), usersPost)
 
 router.put("/:id", userPut)
 

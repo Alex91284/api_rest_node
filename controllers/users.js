@@ -1,5 +1,6 @@
 const { response, request } = require("express")
-const db = require('../database/firebase')
+const { db, bucket } = require("../database/firebase")
+const { v4: uuidv4 } = require("uuid")
 
 
 const usersGet = async (req = request, res = response) => {
@@ -13,26 +14,54 @@ const usersGet = async (req = request, res = response) => {
   }
 }
 
-const Usuario = require("../models/usuario")
-
-const usersPost = async (req, res = response) => {
+const usersPost = async (req = request, res = response) => {
   try {
-    const newUser = new Usuario(req.body)
+    const { name, email, password, role } = req.body
+    const file = req.file //archivo imagen recibido
 
-    const docRef = await db.collection("users").add({ ...newUser })
+    let imgUrl = ""
+
+    if (file) {
+      const blob = bucket.file(`users/${uuidv4()}_${file.originalname}`)
+      const blobStream = blob.createWriteStream({
+        metadata: {
+          contentType: file.mimetype,
+        },
+      })
+
+      blobStream.end(file.buffer)
+
+      await new Promise((resolve, reject) => {
+        blobStream.on("finish", resolve)
+        blobStream.on("error", reject)
+      })
+
+      // Obtener URL pública
+      imgUrl = `https://storage.googleapis.com/${bucket.name}/${blob.name}`
+    }
+
+    const user = {
+      name,
+      email,
+      password,
+      role,
+      img: imgUrl, //  URL de la imagen
+      state: true,
+      google: false,
+    }
+
+    const docRef = await db.collection("users").add(user)
 
     res.status(201).json({
       msg: "Usuario agregado correctamente",
       id: docRef.id,
-      ...newUser,
-    });
+      user,
+    })
   } catch (err) {
-    console.error(err)
+    console.error(err);
     res.status(500).send("Error al agregar usuario")
   }
-};
-
-
+}
 
 const userPut = async (req, res = response) => {
   const { id } = req.params
