@@ -1,6 +1,6 @@
 const { Router } = require("express")
-const multer = require("multer")
-const upload = multer()
+const upload = require("../middlewares/upload")
+
 const {
   usersGet,
   usersPost,
