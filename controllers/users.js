@@ -50,6 +50,7 @@ const usersPost = async (req = request, res = response) => {
       google: false,
     }
 
+
     const docRef = await db.collection("users").add(user)
 
     res.status(201).json({
