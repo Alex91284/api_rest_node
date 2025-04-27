@@ -1,4 +1,14 @@
 const { Router } = require("express")
+const multer = require("multer")
+const upload = multer({
+  fileFilter: (req, file, cb) => {
+    if (file.mimetype.startsWith("image/")) {
+      cb(null, true);
+    } else {
+      cb(new Error("Solo imágenes son permitidas"), false);
+    }
+  },
+})
 const {
   usersGet,
   usersPost,
@@ -11,7 +21,7 @@ const router = Router()
 
 router.get("/", usersGet)
 
-router.post("/", usersPost)
+router.post("/", upload.single("file"), usersPost)
 
 router.put("/:id", userPut)
 
