@@ -1,5 +1,14 @@
 const { Router } = require("express")
-const upload = require("../middlewares/upload")
+const multer = require("multer")
+const upload = multer({
+  fileFilter: (req, file, cb) => {
+    if (file.mimetype.startsWith("image/")) {
+      cb(null, true);
+    } else {
+      cb(new Error("Solo imágenes son permitidas"), false);
+    }
+  },
+})
 
 const {
   usersGet,

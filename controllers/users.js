@@ -35,7 +35,7 @@ const usersPost = async (req = request, res = response) => {
         blobStream.on("finish", resolve)
         blobStream.on("error", reject)
       })
-
+      await blob.makePublic()
       // Obtener URL pública
       imgUrl = `https://storage.googleapis.com/${bucket.name}/${blob.name}`
     }
@@ -49,6 +49,7 @@ const usersPost = async (req = request, res = response) => {
       state: true,
       google: false,
     }
+
 
     const docRef = await db.collection("users").add(user)
 
