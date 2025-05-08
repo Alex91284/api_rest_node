@@ -1,14 +1,5 @@
-const { Router } = require("express")
-const multer = require("multer")
-const upload = multer({
-  fileFilter: (req, file, cb) => {
-    if (file.mimetype.startsWith("image/")) {
-      cb(null, true);
-    } else {
-      cb(new Error("Solo imágenes son permitidas"), false);
-    }
-  },
-})
+const { Router } = require("express");
+const upload = require("../middlewares/upload"); // ← Usamos el middleware correcto
 
 const {
   usersGet,
@@ -16,18 +7,14 @@ const {
   userPut,
   usersDelete,
   usersPatch,
-} = require("../controllers/users")
+} = require("../controllers/users");
 
-const router = Router()
+const router = Router();
 
-router.get("/", usersGet)
+router.get("/", usersGet);
+router.post("/", upload.single("file"), usersPost); // ← Campo debe llamarse "imagen"
+router.put("/:id", userPut);
+router.patch("/:id", usersPatch);
+router.delete("/:id", usersDelete);
 
-router.post("/", upload.single("file"), usersPost)
-
-router.put("/:id", userPut)
-
-router.patch("/:id", usersPatch)
-
-router.delete("/:id", usersDelete)
-
-module.exports = router
+module.exports = router;
