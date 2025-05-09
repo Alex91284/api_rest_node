@@ -1,8 +1,7 @@
-// utils/uploadToImgur.js
-const axios = require("axios");
+const axios = require("axios")
 
 const uploadToImgur = async (fileBuffer) => {
-  const clientId = "bfc022e505fc681"; // <-- reemplaza esto con tu Client ID
+  const clientId = "bfc022e505fc681"
 
   const response = await axios.post(
     "https://api.imgur.com/3/image",
@@ -15,9 +14,9 @@ const uploadToImgur = async (fileBuffer) => {
         Authorization: `Client-ID ${clientId}`,
       },
     }
-  );
+  )
 
-  return response.data.data.link; // URL pública de la imagen
-};
+  return response.data.data.link
+}
 
-module.exports = uploadToImgur;
+module.exports = uploadToImgur

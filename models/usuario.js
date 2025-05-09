@@ -8,14 +8,14 @@ class Usuario {
     state = true,
     google = false,
   }) {
-    this.name = name;
-    this.email = email;
-    this.password = password;
-    this.img = img;
-    this.role = role;
-    this.state = state;
-    this.google = google;
+    this.name = name
+    this.email = email
+    this.password = password
+    this.img = img
+    this.role = role
+    this.state = state
+    this.google = google
   }
 }
 
-module.exports = Usuario;
+module.exports = Usuario
