@@ -1,20 +1,20 @@
 const { Router } = require("express");
-const upload = require("../middlewares/upload"); // ← Usamos el middleware correcto
-
 const {
   usersGet,
   usersPost,
   userPut,
-  usersDelete,
   usersPatch,
+  usersDelete,
 } = require("../controllers/users");
+const multer = require("multer");
+const upload = multer();
 
 const router = Router();
 
 router.get("/", usersGet);
-router.post("/", upload.single("file"), usersPost); // ← Campo debe llamarse "imagen"
+router.post("/", upload.single("foto"), usersPost); // << aquí procesamos la imagen
 router.put("/:id", userPut);
-router.patch("/:id", usersPatch);
+router.patch("/", usersPatch);
 router.delete("/:id", usersDelete);
 
 module.exports = router;

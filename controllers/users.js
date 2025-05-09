@@ -1,7 +1,9 @@
 const { response, request } = require("express");
+const multer = require("multer");
+const upload = multer();
+const uploadToImgur = require("../middlewares/upload");
 const Usuario = require("../models/usuario");
 const { db } = require("../database/firebase");
-const { v4: uuidv4 } = require("uuid");
 
 const usersGet = async (req = request, res = response) => {
   try {
@@ -16,7 +18,7 @@ const usersGet = async (req = request, res = response) => {
 
 const usersPost = async (req, res) => {
   try {
-    const { name, email, fotoUrl } = req.body;
+    const { name, email } = req.body;
 
     if (!name || !email) {
       return res
@@ -24,13 +26,18 @@ const usersPost = async (req, res) => {
         .json({ ok: false, msg: "Nombre y email son obligatorios" });
     }
 
+    let fotoUrl = null;
+    if (req.file) {
+      fotoUrl = await uploadToImgur(req.file.buffer);
+    }
+
     const nuevoUsuario = {
       name,
       email,
-      fotoUrl: fotoUrl || null, // null es permitido por Firestore
+      fotoUrl,
     };
 
-    const ref = await db.collection("users").add(nuevoUsuario);
+    const ref = await db.collection("usuarios").add(nuevoUsuario);
 
     res.json({
       ok: true,
@@ -38,10 +45,11 @@ const usersPost = async (req, res) => {
       usuario: nuevoUsuario,
     });
   } catch (error) {
-    console.error("Error guardando usuario en Firestore:", error);
+    console.error("Error guardando usuario en Firestore:", error.message);
     res.status(500).json({ ok: false, msg: "Error al crear usuario" });
   }
 };
+
 
 
 const userPut = async (req, res = response) => {

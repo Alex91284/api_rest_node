@@ -1,27 +1,23 @@
-const multer = require("multer")
+// utils/uploadToImgur.js
+const axios = require("axios");
 
-// Configuración de almacenamiento en memoria
-const storage = multer.memoryStorage()
+const uploadToImgur = async (fileBuffer) => {
+  const clientId = "bfc022e505fc681"; // <-- reemplaza esto con tu Client ID
 
-const upload = multer({
-  storage,
-  limits: {
-    fileSize: 5 * 1024 * 1024, // máximo 5MB por imagen
-  },
-  fileFilter: (req, file, cb) => {
-    const filetypes = /jpeg|jpg|png|gif/
-    const mimetype = filetypes.test(file.mimetype)
-    const extname = filetypes.test(file.originalname.toLowerCase())
-
-    if (mimetype && extname) {
-      return cb(null, true)
+  const response = await axios.post(
+    "https://api.imgur.com/3/image",
+    {
+      image: fileBuffer.toString("base64"),
+      type: "base64",
+    },
+    {
+      headers: {
+        Authorization: `Client-ID ${clientId}`,
+      },
     }
-    cb(
-      new Error(
-        "Error: El archivo debe ser una imagen válida (jpeg, jpg, png, gif)"
-      )
-    )
-  },
-})
+  );
 
-module.exports = upload
+  return response.data.data.link; // URL pública de la imagen
+};
+
+module.exports = uploadToImgur;
