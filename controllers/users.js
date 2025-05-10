@@ -18,12 +18,12 @@ const usersGet = async (req = request, res = response) => {
 
 const usersPost = async (req, res) => {
   try {
-    const { name, email } = req.body
+    const { name, email, password, role, state, google } = req.body
 
-    if (!name || !email) {
+    if (!name || !email || !password || !role) {
       return res
         .status(400)
-        .json({ ok: false, msg: "Nombre y email son obligatorios" })
+        .json({ ok: false, msg: "Nombre, email y password son obligatorios" })
     }
 
     let fotoUrl = null
@@ -34,7 +34,11 @@ const usersPost = async (req, res) => {
     const nuevoUsuario = {
       name,
       email,
+      password,
       fotoUrl,
+      role,
+      state,
+      google
     }
 
     const ref = await db.collection("users").add(nuevoUsuario)
