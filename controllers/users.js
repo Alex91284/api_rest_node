@@ -2,7 +2,6 @@ const { response, request } = require("express")
 const multer = require("multer")
 const upload = multer()
 const uploadToImgur = require("../middlewares/upload")
-const Usuario = require("../models/usuario")
 const { db } = require("../database/firebase")
 
 const usersGet = async (req = request, res = response) => {
