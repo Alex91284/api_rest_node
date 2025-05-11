@@ -53,17 +53,31 @@ const usersPost = async (req, res) => {
   }
 }
 
-const userPut = async (req, res = response) => {
+const userPut = async (req, res) => {
   const { id } = req.params
   const data = req.body
+
   try {
+    if (req.file) {
+      const fotoUrl = await uploadToImgur(req.file.buffer)
+      data.fotoUrl = fotoUrl
+    }
+
+    if (Object.keys(data).length === 0) {
+      return res.status(400).json({
+        ok: false,
+        msg: "No se proporcionaron datos para actualizar.",
+      })
+    }
+
     await db.collection("users").doc(id).update(data)
-    res.json({ id, ...data })
+    res.json({ ok: true, id, ...data })
   } catch (err) {
-    console.error(err)
-    res.status(500).send("Error al actualizar usuario")
+    console.error("Error actualizando usuario:", err.message)
+    res.status(500).json({ ok: false, msg: "Error al actualizar usuario" })
   }
 }
+
 
 const usersPatch = (req, res = response) => {
   res.json({ msg: "patch API" })
