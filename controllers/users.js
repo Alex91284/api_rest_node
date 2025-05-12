@@ -85,12 +85,21 @@ const usersPatch = (req, res = response) => {
 
 const usersDelete = async (req, res = response) => {
   const { id } = req.params
+
   try {
-    await db.collection("users").doc(id).delete()
-    res.json({ msg: "Usuario eliminado", id })
+    const userRef = db.collection("users").doc(id)
+    const userDoc = await userRef.get()
+
+    if (!userDoc.exists) {
+      return res.status(404).json({ ok: false, msg: "El usuario no existe" })
+    }
+
+    await userRef.delete()
+    res.json({ ok: true, msg: "Usuario eliminado", id })
+
   } catch (err) {
-    console.error(err)
-    res.status(500).send("Error al eliminar usuario")
+    console.error("Error al eliminar usuario:", err.message)
+    res.status(500).json({ ok: false, msg: "Error al eliminar usuario" })
   }
 }
 
