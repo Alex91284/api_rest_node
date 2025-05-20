@@ -7,14 +7,21 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     users.forEach((user) => {
       const div = document.createElement("div")
-      div.style.marginBottom = "20px"
+      div.classList.add("card")
+      div.style.marginBottom = "10px"
 
       div.innerHTML = `
-        <strong>Nombre:</strong> ${user.name}<br>
-        <strong>Email:</strong> ${user.email}<br>
-        ${user.fotoUrl ? `<img src="${user.fotoUrl}" width="150">` : "Sin foto"}
+       <section class="card-header">
+          <h2 class="card-title">${user.name}</h2>
+        </section>
+        <section class="card-body">
+          ${user.fotoUrl ? `<img src="${user.fotoUrl}" width="150"` : "Sin foto"}<br>
+        </section>
+        <section class="card-footer">
+          <button class="editar-btn">Editar</button>
+          <button class="eliminar-btn" data-id="${user.id}">Eliminar</button>
+        </section>
       `
-
       container.appendChild(div)
     })
   } catch (err) {
