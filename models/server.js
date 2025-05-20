@@ -1,5 +1,6 @@
 const express = require("express")
 const cors = require("cors")
+const path = require("path")
 const userRoutes = require("../routes/users")
 
 class Server {
@@ -15,16 +16,33 @@ class Server {
 
     // Rutas
     this.routes()
+
+    // Rutas del frontend
+    this.frontendRoutes()
   }
 
   middlewares() {
     this.app.use(cors())
     this.app.use(express.json())
-    this.app.use(express.static("public"));
+    this.app.use(express.static("public"))
   }
 
   routes() {
     this.app.use(this.paths.users, userRoutes)
+  }
+
+  frontendRoutes() {
+    this.app.get("/", (req, res) => {
+      res.sendFile(path.resolve(__dirname, "../public/HTML/index.html"))
+    })
+
+    this.app.get("/crear", (req, res) => {
+      res.sendFile(path.resolve(__dirname, "../public/HTML/crear.html"))
+    })
+
+    this.app.get("/editar", (req, res) => {
+      res.sendFile(path.resolve(__dirname, "../public/HTML/editar.html"))
+    })
   }
 
   listen() {
