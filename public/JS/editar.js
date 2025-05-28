@@ -1,24 +1,25 @@
 document.addEventListener("DOMContentLoaded", async () => {
-  const params = new URLSearchParams(window.location.search);
-  const userId = params.get("id");
-
+  const params = new URLSearchParams(window.location.search)
+  const userId = params.get("id")
+  console.log("<<<<<<<<< user ID", userId);
+  
   if (!userId) {
-    alert("ID de usuario no encontrado");
-    window.location.href = "/";
-    return;
+    alert("ID de usuario no encontrado")
+    return
   }
 
-  const form = document.getElementById("form-editar");
+  const form = document.getElementById("form-editar")
 
   try {
-    const res = await fetch("/api/users");
-    const users = await res.json();
-    const user = users.find((u) => u.id === userId);
+    const res = await fetch("/api/users")
+    const users = await res.json()
+    const user = users.find((u) => u.id === userId)
+
+    console.log(userId, users)
 
     if (!user) {
-      alert("Usuario no encontrado");
-      window.location.href = "/";
-      return;
+      alert("Usuario no encontrado")
+      return
     }
 
     form.innerHTML = `
@@ -26,6 +27,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       <input type="email" name="email" value="${user.email}" required />
       <input type="password" name="password" placeholder="Nuevo password" />
       <input type="text" name="role" value="${user.role || ""}" />
+      <input type="text" name="state" value="${user.state || ""}" />
+      <input type="text" name="google" value="${user.google || ""}" />
       <input type="file" name="foto" />
       <button type="submit">Actualizar</button>
     `;
