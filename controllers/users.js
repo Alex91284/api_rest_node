@@ -16,6 +16,7 @@ const usersGet = async (req = request, res = response) => {
 }
 
 const usersPost = async (req, res) => {
+  console.log(req.file);
   try {
     const { name, email, password, role, state, google } = req.body
 
@@ -28,16 +29,17 @@ const usersPost = async (req, res) => {
     let fotoUrl = null
     if (req.file) {
       fotoUrl = await uploadToImgur(req.file.buffer)
+      console.log("URL de imagen subida:", fotoUrl)
     }
 
     const nuevoUsuario = {
       name,
       email,
       password,
-      fotoUrl,
       role,
       state,
-      google
+      google,
+      fotoUrl
     }
 
     const ref = await db.collection("users").add(nuevoUsuario)

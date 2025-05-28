@@ -13,7 +13,7 @@ const router = Router()
 
 router.get("/", usersGet)
 router.post("/", upload.single("foto"), usersPost) 
-router.put("/:id", upload.single("foto"), userPut);
+router.put("/:id", upload.single("foto"), userPut)
 router.patch("/", usersPatch)
 router.delete("/:id", usersDelete)
 

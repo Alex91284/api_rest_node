@@ -34,31 +34,32 @@ document.addEventListener("DOMContentLoaded", async () => {
     `;
 
     form.addEventListener("submit", async (e) => {
-      e.preventDefault();
+      e.preventDefault()
 
-      const formData = new FormData(form);
+      const formData = new FormData(form)
 
       try {
         const updateRes = await fetch(`/api/users/${userId}`, {
           method: "PUT",
           body: formData,
-        });
+        })
 
-        const result = await updateRes.json();
+        const result = await updateRes.json()
 
         if (result.ok) {
-          alert("Usuario actualizado");
-          window.location.href = "/";
+          alert("Usuario actualizado")
+          window.location.href = "/"
         } else {
-          alert("Error: " + result.msg);
+          alert("Error: " + result.msg)
         }
       } catch (err) {
-        console.error("Error actualizando", err);
-        alert("Error al actualizar");
+        console.error("Error actualizando", err)
+        alert("Error al actualizar")
       }
-    });
+    })
   } catch (err) {
-    console.error("Error cargando usuario", err);
-    alert("Error al cargar usuario");
+    console.error("Error cargando usuario", err)
+    
+    alert("Error al cargar usuario")
   }
-});
+})

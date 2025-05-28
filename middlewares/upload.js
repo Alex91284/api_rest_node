@@ -1,22 +1,35 @@
 const axios = require("axios")
 
 const uploadToImgur = async (fileBuffer) => {
-  const clientId = "bfc022e505fc681"
-
-  const response = await axios.post(
-    "https://api.imgur.com/3/image",
-    {
-      image: fileBuffer.toString("base64"),
-      type: "base64",
-    },
-    {
-      headers: {
-        Authorization: `Client-ID ${clientId}`,
-      },
+  const apiKey =
+    process.env.IMGBB_API_KEY || "d203e774a1ae6a3cef27dda3dcac0126"
+  
+    if (!fileBuffer) {
+      throw new Error("No se proporcionó el buffer de imagen");
     }
-  )
+  
+    const base64Image = fileBuffer.toString("base64")
 
-  return response.data.data.link
+  const formData = new URLSearchParams()
+  formData.append("key", apiKey)
+  formData.append("image", base64Image)
+
+  try {
+    const response = await axios.post(
+      "https://api.imgbb.com/1/upload", formData.toString(),
+      {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+      }
+    )
+    console.log(">>>>><<<<<", response.data)
+    
+    return response.data.data.url
+  } catch (error) {
+    console.error("Error subiendo imagen a ImgBB:", error.response?.data || error.message)
+    throw new Error("No se pudo subir la imagen")
+  }
 }
 
 module.exports = uploadToImgur

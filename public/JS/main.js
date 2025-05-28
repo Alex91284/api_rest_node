@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           <button onclick="editarUsuario('${user.id}')">Editar</button>
           <button class="eliminar-btn" data-id="${user.id}">Eliminar</button>
         </section>
-      `;
+      `
       container.appendChild(div)
     })
   } catch (err) {
@@ -33,5 +33,5 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 })
 function editarUsuario(id) {
-  window.location.href = `/editar?id=${id}`;
+  window.location.href = `/editar?id=${id}`
 }

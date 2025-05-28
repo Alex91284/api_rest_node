@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <title>Crear Usuario</title>
-  <link rel="stylesheet" href="../CSS/styles.css" />
+  <link rel="stylesheet" href="../CSS/index.css" />
 </head>
 <body>
   <h1>Crear Usuario</h1>
-  <form id="form-crear">
-    <input type="text" name="name" placeholder="Nombre" required />
-    <input type="email" name="email" placeholder="Email" required />
-    <input type="password" name="password" placeholder="Password" required />
+  <form id="form-crear" enctype="multipart/form-data" method="POST">
+    <input type="text" name="name" placeholder="Nombre" autocomplete="name" required />
+    <input type="email" name="email" placeholder="Email" autocomplete="email" required />
+    <input type="password" name="password" placeholder="Password" autocomplete="new-password" required />
     <input type="text" name="role" placeholder="Rol" />
     <input type="text" name="state" placeholder="Estado" />
     <input type="text" name="google" placeholder="Google" />
