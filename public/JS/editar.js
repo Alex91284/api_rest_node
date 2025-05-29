@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", async () => {
   const params = new URLSearchParams(window.location.search)
   const userId = params.get("id")
-  console.log("<<<<<<<<< user ID", userId);
   
   if (!userId) {
     alert("ID de usuario no encontrado")
@@ -15,7 +14,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     const users = await res.json()
     const user = users.find((u) => u.id === userId)
 
-    console.log(userId, users)
 
     if (!user) {
       alert("Usuario no encontrado")

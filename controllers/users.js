@@ -16,7 +16,6 @@ const usersGet = async (req = request, res = response) => {
 }
 
 const usersPost = async (req, res) => {
-  console.log(req.file);
   try {
     const { name, email, password, role, state, google } = req.body
 
@@ -29,7 +28,6 @@ const usersPost = async (req, res) => {
     let fotoUrl = null
     if (req.file) {
       fotoUrl = await uploadToImgur(req.file.buffer)
-      console.log("URL de imagen subida:", fotoUrl)
     }
 
     const nuevoUsuario = {
@@ -86,7 +84,7 @@ const usersPatch = (req, res = response) => {
 }
 
 const usersDelete = async (req, res = response) => {
-  const { id } = req.params
+  const id = req.params.id
 
   try {
     const userRef = db.collection("users").doc(id)

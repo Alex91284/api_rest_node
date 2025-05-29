@@ -5,7 +5,7 @@ const uploadToImgur = async (fileBuffer) => {
     process.env.IMGBB_API_KEY || "d203e774a1ae6a3cef27dda3dcac0126"
   
     if (!fileBuffer) {
-      throw new Error("No se proporcionó el buffer de imagen");
+      throw new Error("No se proporcionó el buffer de imagen")
     }
   
     const base64Image = fileBuffer.toString("base64")
@@ -23,7 +23,6 @@ const uploadToImgur = async (fileBuffer) => {
         },
       }
     )
-    console.log(">>>>><<<<<", response.data)
     
     return response.data.data.url
   } catch (error) {
