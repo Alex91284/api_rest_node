@@ -23,3 +23,20 @@ document.getElementById("form-crear").addEventListener("submit", async (e) => {
     alert("Error al crear usuario")
   }
 })
+
+document.getElementById("foto").addEventListener("change", function () {
+  const file = this.files[0]
+  const preview = document.getElementById("preview")
+
+  if (file) {
+    const reader = new FileReader()
+    reader.onload = function (e) {
+      preview.src = e.target.result;
+      preview.style.display = "block"
+    }
+    reader.readAsDataURL(file)
+  } else {
+    preview.src = ""
+    preview.style.display = "none"
+  }
+})

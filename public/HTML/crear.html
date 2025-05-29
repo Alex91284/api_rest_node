@@ -4,17 +4,22 @@
   <meta charset="UTF-8">
   <title>Crear Usuario</title>
   <link rel="stylesheet" href="../CSS/index.css" />
+  <link rel="stylesheet" href="../CSS/crearUsuario.css" />
 </head>
 <body>
   <h1>Crear Usuario</h1>
   <form id="form-crear" enctype="multipart/form-data" method="POST">
+    <div class="avatar">
+      <input class="ava" type="file" name="foto" id="foto" />
+      <img id="preview" src="" alt="Vista previa" width="150" style="display:none; margin-top:10px;" />
+      <div class="hover-text">Cambiar Foto</div>
+    </div>
     <input type="text" name="name" placeholder="Nombre" autocomplete="name" required />
     <input type="email" name="email" placeholder="Email" autocomplete="email" required />
     <input type="password" name="password" placeholder="Password" autocomplete="new-password" required />
     <input type="text" name="role" placeholder="Rol" />
     <input type="text" name="state" placeholder="Estado" />
     <input type="text" name="google" placeholder="Google" />
-    <input type="file" name="foto" />
     <button type="submit">Guardar</button>
   </form>
   <script src="../JS/crear.js"></script>
