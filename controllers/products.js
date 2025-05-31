@@ -65,14 +65,14 @@ const productPut = async (req, res) => {
       return res.status(400).json({
         ok: false,
         msg: "No se proporcionaron datos para actualizar.",
-      });
+      })
     }
 
-    await db.collection("products").doc(id).update(data);
-    res.json({ ok: true, id, ...data });
+    await db.collection("products").doc(id).update(data)
+    res.json({ ok: true, id, ...data })
   } catch (err) {
-    console.error("Error actualizando product:", err.message);
-    res.status(500).json({ ok: false, msg: "Error al actualizar product" });
+    console.error("Error actualizando product:", err.message)
+    res.status(500).json({ ok: false, msg: "Error al actualizar product" })
   }
 }
 
