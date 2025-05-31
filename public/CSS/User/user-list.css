@@ -1,0 +1,114 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 90%;
+  margin: auto;
+  font-family: Arial, sans-serif;
+  background-color: #e4f8e5;
+  color: #333;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+h1 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 16px;
+  color: #333;
+}
+
+a {
+  margin-left: 1%;
+  margin-bottom: 2%;
+  text-decoration: none;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 3px 7px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+a:hover {
+  background-color: #45a049;
+}
+
+#usuarios-container {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.card {
+  width: 15%;
+  height: 330px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px;
+  margin: 5px;
+  background-color: #dad6d6;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+}
+
+.card-header {
+  width: 100%;
+  height: 10%;
+  text-transform: capitalize;
+  margin-bottom: 8px;
+  color: #333;
+  overflow: hidden;
+}
+
+.card h2 {
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.card img {
+  width: 100%;
+  object-fit: cover;
+  height: 230px;
+  margin-bottom: 8px;
+  border-radius: 10px;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-footer button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 4px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.card-footer button:hover {
+  background-color: #45a049;
+}
+
+.card-footer button:disabled:hover {
+  background-color: #ccc;
+}

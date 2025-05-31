@@ -2,15 +2,16 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Crear Usuario</title>
   <link rel="stylesheet" href="../CSS/index.css" />
-  <link rel="stylesheet" href="../CSS/crearUsuario.css" />
+  <link rel="stylesheet" href="../CSS/User/crearUsuario.css" />
 </head>
 <body>
   <h1>Crear Usuario</h1>
   <form id="form-crear" enctype="multipart/form-data" method="POST">
     <div class="avatar">
-      <input class="ava" type="file" name="foto" id="foto" />
+      <input class="ava" type="file" name="fotoU" id="fotoU" />
       <img id="preview" src="" alt="Vista previa" width="150" style="display:none; margin-top:10px;" />
       <div class="hover-text">Cambiar Foto</div>
     </div>
@@ -22,6 +23,6 @@
     <input type="text" name="google" placeholder="Google" />
     <button type="submit">Guardar</button>
   </form>
-  <script src="../JS/crear.js"></script>
+  <script src="../JS/User/createUser.js"></script>
 </body>
 </html>

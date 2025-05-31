@@ -1,17 +1,17 @@
-*{
+* {
   margin: 0%;
   padding: 0%;
   box-sizing: border-box;
 }
-#form-crear{
+#form-crear-producto {
   width: 70%;
   margin: 50px auto;
   padding: 20px;
   background-color: #fff;
   border-radius: 15px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
-#form-crear input {
+#form-crear-producto input {
   width: 100%;
   padding: 5px;
   font-family: Arial, sans-serif;
@@ -24,7 +24,7 @@
 .avatar {
   width: 180px;
   height: 180px;
-  background-image: url('../images/person.png');
+  background-image: url('../../images/person.png');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -36,7 +36,7 @@
   border: solid 1px #c4c3c3;
 }
 .avatar:hover {
-  background-image: url('../images/person_add.png');
+  background-image: url('../../images/person_add.png');
   background-size: contain;
 }
 .hover-text {
@@ -52,7 +52,7 @@
   transition: opacity 0.3s ease;
   border-radius: 0 0 50% 50%;
 }
-.ava{
+.ava {
   width: 165px;
   height: 165px;
   margin: 10px auto;

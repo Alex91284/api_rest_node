@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crear Producto</title>
+  <link rel="stylesheet" href="/CSS/index.css" />
+  <link rel="stylesheet" href="/CSS/Product/crearProducto.css" />
+</head>
+<body>
+  <h1>Crear Producto</h1>
+  <form id="form-crear-producto" enctype="multipart/form-data" method="POST">
+    <div class="avatar">
+      <input class="ava" type="file" name="fotoP" id="fotoP" />
+      <img id="preview" src="" alt="Vista previa" width="150" style="display:none; margin-top:10px;" />
+      <div class="hover-text">Cambiar Foto</div>
+    </div>
+    <input type="text" name="name" placeholder="Nombre del Producto" autocomplete="name" required />
+    <input type="text" name="description" placeholder="Descripción" autocomplete="description" required />
+    <input type="number" name="price" placeholder="Precio" autocomplete="price" required />
+    <input type="text" name="category" placeholder="Categoría" autocomplete="category" required />
+    <input type="text" name="stock" placeholder="Stock" autocomplete="stock" required />
+    <button type="submit">Guardar</button>
+  </form>
+  <script src="/JS/Product/createProduct.js"></script>
+</body>
+</html>

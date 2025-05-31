@@ -78,7 +78,6 @@ const userPut = async (req, res) => {
   }
 }
 
-
 const usersPatch = (req, res = response) => {
   res.json({ msg: "patch API" })
 }
@@ -108,5 +107,5 @@ module.exports = {
   usersPost,
   userPut,
   usersPatch,
-  usersDelete,
+  usersDelete
 }

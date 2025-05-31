@@ -24,7 +24,7 @@ document.getElementById("form-crear").addEventListener("submit", async (e) => {
   }
 })
 
-document.getElementById("foto").addEventListener("change", function () {
+document.getElementById("fotoU").addEventListener("change", function () {
   const file = this.files[0]
   const preview = document.getElementById("preview")
 
