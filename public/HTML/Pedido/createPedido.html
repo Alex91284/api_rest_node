@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crear Pedido</title>
+  <link rel="stylesheet" href="/CSS/index.css">
+  <link rel="stylesheet" href="/CSS/Pedido/createPedido.css">
+</head>
+<body>
+  <h1>Crear Pedido</h1>
+  <form id="form-crear-pedido" >
+    <input type="text" id="client" name="client" placeholder="Cliente" autocomplete="client" required />
+    <textarea type="text" id="products" name="products" placeholder="Productos" autocomplete="products" rows="6" required ></textarea>
+    <input type="number" id="total" name="total" placeholder="Total" required />
+    <input type="text" id="state" name="state" placeholder="Estado" />
+    <input type="text" id="ventor" name="ventor" placeholder="Vendedor" />
+    <button type="submit">Guardar</button>
+  </form>
+  <script src="/JS/Pedido/createPedido.js"></script>
+</body>
+</html>

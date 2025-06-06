@@ -14,7 +14,6 @@ const productGet = async (req = request, res = response) => {
     res.status(500).send("Error al obtener productos")
   }
 }
-
 const productPost = async (req, res) => {
   try {
     const { name, price, description, category } = req.body

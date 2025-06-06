@@ -3,6 +3,7 @@ const cors = require("cors")
 const path = require("path")
 const userRoutes = require("../routes/users")
 const productRoutes = require("../routes/products")
+const pedidoRoutes = require("../routes/pedidos")
 
 class Server {
   constructor() {
@@ -11,6 +12,7 @@ class Server {
     this.paths = {
       users: "/api/users",
       products: "/api/products",
+      pedidos: "/api/pedidos",
     }
 
     // Middlewares
@@ -32,6 +34,7 @@ class Server {
   routes() {
     this.app.use(this.paths.users, userRoutes)
     this.app.use(this.paths.products, productRoutes)
+    this.app.use(this.paths.pedidos, pedidoRoutes)
   }
 
   frontendRoutes() {
@@ -63,6 +66,21 @@ class Server {
     
     this.app.get("/editar-producto", (req, res) => {
       res.sendFile(path.resolve(__dirname, "../public/HTML/Product/editar-producto.html"))
+    }
+    )
+
+    this.app.get("/pedidos-list", (req, res) => {
+      res.sendFile(path.resolve(__dirname, "../public/HTML/Pedido/pedidos-list.html"))
+    }
+    )
+
+    this.app.get("/createPedido", (req, res) => {
+      res.sendFile(path.resolve(__dirname, "../public/HTML/Pedido/createPedido.html"))
+    }
+    )
+
+    this.app.get("/editPedido", (req, res) => {
+      res.sendFile(path.resolve(__dirname, "../public/HTML/Pedido/editPedido.html"))
     }
     )
   }
