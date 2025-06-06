@@ -13,7 +13,7 @@ admin.initializeApp({
     auth_provider_x509_cert_url: process.env.FIREBASE_AUTH_PROVIDER_CERT_URL,
     client_x509_cert_url: process.env.FIREBASE_CLIENT_CERT_URL,
   }),
-});
+})
 
 const db = admin.firestore()
 

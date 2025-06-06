@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           try {
             const res = await fetch(`/api/users/${user.id}`, {
               method: "DELETE",
-            });
+            })
             const data = await res.json()
 
             if (data.ok) {

@@ -1,17 +1,17 @@
 function convertirFechaFirestore(fecha) {
   if (fecha && typeof fecha._seconds === "number") {
-    return new Date(fecha._seconds * 1000); // convertir segundos a milisegundos
+    return new Date(fecha._seconds * 1000) // convertir segundos a milisegundos
   }
-  return null;
+  return null
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
   try {
-    const res = await fetch("/api/pedidos");
-    const pedidos = await res.json();
+    const res = await fetch("/api/pedidos")
+    const pedidos = await res.json()
 
-    const container = document.getElementById("pedidos-container");
-    container.innerHTML = "";
+    const container = document.getElementById("pedidos-container")
+    container.innerHTML = ""
 
     pedidos.forEach((pedido) => {
 
@@ -23,11 +23,11 @@ document.addEventListener("DOMContentLoaded", async () => {
             month: "long",
             day: "numeric",
           })
-        : "Fecha no disponible";
+        : "Fecha no disponible"
 
-      const div = document.createElement("div");
-      div.classList.add("card");
-      div.style.marginBottom = "10px";
+      const div = document.createElement("div")
+      div.classList.add("card")
+      div.style.marginBottom = "10px"
 
       div.innerHTML = `
         <section class="card-header">
@@ -53,41 +53,41 @@ document.addEventListener("DOMContentLoaded", async () => {
           <button onclick="editPedido('${pedido.id}')">Editar</button>
           <button class="eliminar-btn">Eliminar</button>
         </section>
-      `;
+      `
 
-      const eliminarBtn = div.querySelector(".eliminar-btn");
+      const eliminarBtn = div.querySelector(".eliminar-btn")
       eliminarBtn.addEventListener("click", async () => {
         const confirmacion = confirm(
           "¿Estás seguro de que deseas eliminar este pedido?"
-        );
+        )
 
         if (confirmacion) {
           try {
             const res = await fetch(`/api/pedidos/${pedido.id}`, {
               method: "DELETE",
-            });
-            const data = await res.json();
+            })
+            const data = await res.json()
 
             if (data.ok) {
-              alert("Pedido eliminado");
-              location.reload();
+              alert("Pedido eliminado")
+              location.reload()
             } else {
-              alert("Error al eliminar: " + data.msg);
+              alert("Error al eliminar: " + data.msg)
             }
           } catch (error) {
-            console.error("Error eliminando pedido:", error);
-            alert("Ocurrió un error al intentar eliminar al pedido.");
+            console.error("Error eliminando pedido:", error)
+            alert("Ocurrió un error al intentar eliminar al pedido.")
           }
         }
-      });
+      })
 
-      container.appendChild(div);
-    });
+      container.appendChild(div)
+    })
   } catch (err) {
-    console.error("Error al cargar pedidos:", err);
+    console.error("Error al cargar pedidos:", err)
   }
-});
+})
 
 function editPedido(id) {
-  window.location.href = `/editPedido?id=${id}`;
+  window.location.href = `/editPedido?id=${id}`
 }

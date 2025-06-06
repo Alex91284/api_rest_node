@@ -56,8 +56,8 @@ const productPut = async (req, res) => {
 
   try {
     if (req.file) {
-      const fotoUrl = await uploadToImgur(req.file.buffer);
-      data.fotoUrl = fotoUrl;
+      const fotoUrl = await uploadToImgur(req.file.buffer)
+      data.fotoUrl = fotoUrl
     }
 
     if (Object.keys(data).length === 0) {

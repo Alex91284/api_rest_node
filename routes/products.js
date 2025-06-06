@@ -5,7 +5,7 @@ const {
   productPut,
   productPatch,
   productDelete,
-} = require("../controllers/products");
+} = require("../controllers/products")
 const multer = require('multer')
 const upload = multer()
 
