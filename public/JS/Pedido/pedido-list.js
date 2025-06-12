@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       div.innerHTML = `
         <section class="card-header">
-          <h2 class="card-title">Factura de Venta</h2>
+          <h2 class="card-title">Pedido # ${pedido.num_pedido}</h2>
           </section>
           <section class="card-body">
           <p><strong>Fecha:</strong> ${fechaFormateada}</p>
