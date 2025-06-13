@@ -24,6 +24,15 @@ document.addEventListener("DOMContentLoaded", async () => {
             day: "numeric",
           })
         : "Fecha no disponible"
+      
+      const horaFormateada = fechaObj
+        ? fechaObj.toLocaleTimeString("es-ES", {
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+          })
+        : "Hora no disponible"
+      console.log("HORA-FORMATEADA", horaFormateada)
 
       const div = document.createElement("div")
       div.classList.add("card")
@@ -35,6 +44,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           </section>
           <section class="card-body">
           <p><strong>Fecha:</strong> ${fechaFormateada}</p>
+          <p><strong>Hora:</strong> ${horaFormateada}</p>
           <p><strong>Cliente:</strong> ${pedido.cliente}</p>
           <p><strong>Estado:</strong> ${pedido.estado}</p>
           <p><strong>Vendedor:</strong> ${pedido.vendedor}</p>
