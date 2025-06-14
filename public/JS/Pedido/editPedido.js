@@ -19,26 +19,66 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     form.innerHTML = `
-      <input type="text" name="client" value="${pedido.cliente}" />
-      <textarea type="text" name="products"  rows="6">
-      ${pedido.productos.map((producto) => `${producto}`).join("\n")}
-      </textarea>
-      <input type="number" name="total" value="${pedido.total}" />
-      <input type="text" name="state" value="${pedido.estado || ""}" />
-      <input type="text" name="ventor" value="${pedido.vendedor || ""}" />
-      <button type="submit">Actualizar</button>
-    `
-
+    <h2 class="card-title">Pedido #${pedido.num_pedido}</h2>
+  
+    <label>Cliente</label>
+    <input type="text" id="cliente" name="cliente" value="${pedido.cliente}" />
+  
+    <label>Productos</label>
+    <textarea id="productos" name="productos" rows="6">${pedido.productos.join(
+      "\n"
+    )}</textarea>
+  
+    <label>Total</label>
+    <input type="number" id="total" name="total" value="${pedido.total}" />
+    <p>Total en COP: <strong>${new Intl.NumberFormat("es-CO", {
+      style: "currency",
+      currency: "COP",
+    }).format(Number(pedido.total))}</strong></p>
+  
+    <label>Estado</label>
+    <input type="text" id="estado" name="estado" value="${
+      pedido.estado || ""
+    }" />
+  
+    <label>Vendedor</label>
+    <input type="text" id="vendedor" name="vendedor" value="${
+      pedido.vendedor || ""
+    }" />
+  
+    <button type="submit">Actualizar</button>
+  `
     form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const formData = new FormData(form)
+      e.preventDefault()
+      
+      const cliente = document.getElementById("cliente").value.trim()
+      const productos = document
+        .getElementById("productos")
+        .value.split("\n")
+        .map((p) => p.trim())
+        .filter(Boolean)
+
+      const total = Number(document.getElementById("total").value)
+      const estado = document.getElementById("estado").value.trim()
+      const vendedor = document.getElementById("vendedor").value.trim()
+
+      const datosActualizados = {
+        cliente,
+        productos,
+        total,
+        estado,
+        vendedor,
+      }
 
       try {
         const updateRes = await fetch(`/api/pedidos/${pedidoId}`, {
           method: "PUT",
-          body: formData,
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(datosActualizados),
         })
-
+        
         const result = await updateRes.json()
 
         if (result.ok) {

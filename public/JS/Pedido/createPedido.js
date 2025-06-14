@@ -24,14 +24,14 @@ document.getElementById("form-crear-pedido").addEventListener("submit", async (e
 
       const data = await res.json()
 
-      if (res.ok) {
+      if (data.ok) {
         alert("Pedido creado exitosamente")
         window.location.href = "/"
       } else {
         alert("Error: " + (data.msg || "No se pudo crear el pedido"))
       }
-    } catch (error) {
-      console.error("Error en la solicitud:", error)
+    } catch (err) {
+      console.error("Error en la solicitud:", err)
       alert("Error al conectar con el servidor")
     }
   })

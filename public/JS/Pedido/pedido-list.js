@@ -34,13 +34,20 @@ document.addEventListener("DOMContentLoaded", async () => {
         : "Hora no disponible"
       console.log("HORA-FORMATEADA", horaFormateada)
 
+      const totalNum = Number(pedido.total)
+
+      const totalCOP = new Intl.NumberFormat("es-CO", {
+        style: "currency",
+        currency: "COP",
+      }).format(totalNum);      
+
       const div = document.createElement("div")
       div.classList.add("card")
       div.style.marginBottom = "10px"
 
       div.innerHTML = `
-        <section class="card-header">
-          <h2 class="card-title">Pedido # ${pedido.num_pedido}</h2>
+          <section class="card-header">
+            <h2 class="card-title">Pedido # ${pedido.num_pedido}</h2>
           </section>
           <section class="card-body">
           <p><strong>Fecha:</strong> ${fechaFormateada}</p>
@@ -57,13 +64,13 @@ document.addEventListener("DOMContentLoaded", async () => {
               .join("")}
           </ul>
           <br>
-          <p><strong>Total:</strong> $${pedido.total.toFixed(2)}</p>
+          <p><strong>Total:</strong> ${totalCOP}</p>
         </section>
         <section class="card-footer">
           <button onclick="editPedido('${pedido.id}')">Editar</button>
           <button class="eliminar-btn">Eliminar</button>
         </section>
-      `
+      `;
 
       const eliminarBtn = div.querySelector(".eliminar-btn")
       eliminarBtn.addEventListener("click", async () => {
