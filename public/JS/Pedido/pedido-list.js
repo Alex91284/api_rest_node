@@ -32,14 +32,13 @@ document.addEventListener("DOMContentLoaded", async () => {
             second: "2-digit",
           })
         : "Hora no disponible"
-      console.log("HORA-FORMATEADA", horaFormateada)
 
       const totalNum = Number(pedido.total)
 
       const totalCOP = new Intl.NumberFormat("es-CO", {
         style: "currency",
         currency: "COP",
-      }).format(totalNum);      
+      }).format(totalNum)
 
       const div = document.createElement("div")
       div.classList.add("card")
@@ -70,7 +69,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           <button onclick="editPedido('${pedido.id}')">Editar</button>
           <button class="eliminar-btn">Eliminar</button>
         </section>
-      `;
+      `
 
       const eliminarBtn = div.querySelector(".eliminar-btn")
       eliminarBtn.addEventListener("click", async () => {
