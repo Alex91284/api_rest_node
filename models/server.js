@@ -42,6 +42,11 @@ class Server {
       res.sendFile(path.resolve(__dirname, "../public/HTML/index.html"))
     })
 
+    this.app.get("/producto", (req, res) => {
+      res.sendFile(
+        path.resolve(__dirname, "../public/HTML/Product/producto.html"))
+    })    
+
     this.app.get("/user-list", (req, res) => {
       res.sendFile(path.resolve(__dirname, "../public/HTML/User/user-list.html"))
     })

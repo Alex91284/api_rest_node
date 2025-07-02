@@ -16,17 +16,24 @@ document.addEventListener("DOMContentLoaded", async () => {
           <h2 class="card-title">${product.name}</h2>
         </section>
         <section class="card-body">
+        <a class="ir"  href="/producto?id=${product.id}">        
           ${
             product.fotoUrl
               ? `<img src="${product.fotoUrl}" width="150" />`
               : "Sin foto"
-          }<br>
+          }
+          </a>
+          <br>
+          <br>
+          <strong>Precio: $${product.price} </strong>
+          <br>
+          <br>
         </section>
         <section class="card-footer">
           <button onclick="editarProducto('${product.id}')">Editar</button>
           <button class="eliminar-btn">Eliminar</button>
         </section>
-      `
+      `;
 
       const eliminarBtn = div.querySelector(".eliminar-btn")
       eliminarBtn.addEventListener("click", async () => {

@@ -14,6 +14,24 @@ const productGet = async (req = request, res = response) => {
     res.status(500).send("Error al obtener productos")
   }
 }
+
+const productGetById = async (req, res) => {
+  const { id } = req.params
+
+  try {
+    const doc = await db.collection("products").doc(id).get()
+
+    if (!doc.exists) {
+      return res.status(404).json({ ok: false, msg: "Producto no encontrado" })
+    }
+
+    res.json({ id: doc.id, ...doc.data() })
+  } catch (err) {
+    console.error("Error obteniendo producto por ID:", err.message)
+    res.status(500).json({ ok: false, msg: "Error al obtener producto" })
+  }
+}
+
 const productPost = async (req, res) => {
   try {
     const { name, price, description, category } = req.body
@@ -110,6 +128,7 @@ const productDelete = async (req, res) => {
 
 module.exports = {
   productGet,
+  productGetById,
   productPost,
   productPut,
   productPatch,
